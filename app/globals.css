@@ -1,0 +1,343 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-pixel: var(--font-press-start), ui-monospace, monospace;
+
+  --color-sky: #5c94fc;
+  --color-sky-light: #8cb4ff;
+  --color-brick: #c84c0c;
+  --color-brick-dark: #8a2e00;
+  --color-coin: #fbbf24;
+  --color-coin-dark: #b7791f;
+  --color-pipe: #2fa84f;
+  --color-pipe-dark: #1b6e31;
+  --color-ink: #14101f;
+  --color-cream: #fdf6e3;
+  --color-sand: #f1e4c8;
+  --color-mario: #e52521;
+  --color-night: #0f1530;
+  --color-night-2: #1a2147;
+  --color-lava: #ff6a2b;
+  --color-royal: #6b2fa0;
+  --color-sunset: #f7931e;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  color-scheme: light;
+  --background: #5c94fc;
+  --foreground: #14101f;
+  --card: #fdf6e3;
+  --card-foreground: #14101f;
+  --popover: #fdf6e3;
+  --popover-foreground: #14101f;
+  --primary: #e52521;
+  --primary-foreground: #ffffff;
+  --secondary: #fbbf24;
+  --secondary-foreground: #14101f;
+  --muted: #f1e4c8;
+  --muted-foreground: #5b5468;
+  --accent: #2fa84f;
+  --accent-foreground: #ffffff;
+  --destructive: #e52521;
+  --border: #14101f;
+  --input: #14101f;
+  --ring: #fbbf24;
+  --radius: 0.375rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+/* ---------- Pixel primitives ---------- */
+@utility font-pixel {
+  font-family: var(--font-press-start), ui-monospace, monospace;
+  letter-spacing: 0.02em;
+}
+
+@utility pixel-box {
+  border: 3px solid var(--color-ink);
+  box-shadow: 5px 5px 0 0 var(--color-ink);
+}
+
+@utility pixel-box-sm {
+  border: 2px solid var(--color-ink);
+  box-shadow: 3px 3px 0 0 var(--color-ink);
+}
+
+@utility pixel-text-shadow {
+  text-shadow:
+    3px 3px 0 var(--color-ink),
+    -1px -1px 0 var(--color-ink),
+    1px -1px 0 var(--color-ink),
+    -1px 1px 0 var(--color-ink);
+}
+
+@utility brick-bg {
+  background-color: var(--color-brick);
+  background-image:
+    linear-gradient(var(--color-brick-dark) 2px, transparent 2px),
+    linear-gradient(90deg, var(--color-brick-dark) 2px, transparent 2px),
+    linear-gradient(90deg, var(--color-brick-dark) 2px, transparent 2px);
+  background-size:
+    32px 16px,
+    32px 32px,
+    32px 32px;
+  background-position:
+    0 0,
+    0 0,
+    16px 16px;
+}
+
+@utility night-brick-bg {
+  background-color: var(--color-night-2);
+  background-image:
+    linear-gradient(#0a0e22 2px, transparent 2px),
+    linear-gradient(90deg, #0a0e22 2px, transparent 2px),
+    linear-gradient(90deg, #0a0e22 2px, transparent 2px);
+  background-size:
+    32px 16px,
+    32px 32px,
+    32px 32px;
+  background-position:
+    0 0,
+    0 0,
+    16px 16px;
+}
+
+@utility checker-ground {
+  background-color: var(--color-brick);
+  background-image:
+    linear-gradient(45deg, var(--color-brick-dark) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--color-brick-dark) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--color-brick-dark) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--color-brick-dark) 75%);
+  background-size: 24px 24px;
+  background-position:
+    0 0,
+    0 12px,
+    12px -12px,
+    -12px 0;
+}
+
+/* ---------- Animations ---------- */
+@keyframes drift {
+  from {
+    transform: translateX(-20vw);
+  }
+  to {
+    transform: translateX(120vw);
+  }
+}
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes block-bump {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(2px);
+  }
+}
+@keyframes coin-spin {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.15);
+  }
+}
+@keyframes coin-pop {
+  0% {
+    transform: translate(-50%, 0) scale(0.6);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -48px) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes walk {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+@keyframes lava-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+@keyframes drop-in {
+  0% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes rise-in {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes flash-red {
+  0%,
+  100% {
+    background-color: var(--color-mario);
+  }
+  50% {
+    background-color: #7f1010;
+  }
+}
+@keyframes flag-down {
+  from {
+    top: 0%;
+  }
+  to {
+    top: 78%;
+  }
+}
+
+@utility animate-drift {
+  animation: drift linear infinite;
+}
+@utility animate-float-y {
+  animation: float-y 3s ease-in-out infinite;
+}
+@utility animate-coin-spin {
+  animation: coin-spin 1.2s steps(6) infinite;
+}
+@utility animate-block-bump {
+  animation: block-bump 0.4s ease-out;
+}
+@utility animate-twinkle {
+  animation: twinkle 2.4s ease-in-out infinite;
+}
+@utility animate-walk {
+  animation: walk 0.35s steps(2) infinite;
+}
+@utility animate-lava {
+  animation: lava-glow 3s ease-in-out infinite;
+}
+@utility animate-drop-in {
+  animation: drop-in 0.7s cubic-bezier(0.2, 0.8, 0.3, 1.2) both;
+}
+@utility animate-rise-in {
+  animation: rise-in 0.5s ease-out both;
+}
+@utility animate-flash-red {
+  animation: flash-red 1s steps(2) infinite;
+}
+@utility animate-flag-down {
+  animation: flag-down 1.6s ease-in forwards;
+}
+
+.coin-pop {
+  position: absolute;
+  left: 50%;
+  top: -8px;
+  animation: coin-pop 0.6s ease-out forwards;
+}
+
+.pixel-press {
+  transition:
+    transform 80ms ease,
+    box-shadow 80ms ease;
+}
+.pixel-press:hover {
+  transform: translate(-1px, -1px);
+}
+.pixel-press:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 0 var(--color-ink);
+}
+
+.leaflet-container {
+  font-family: var(--font-nunito), sans-serif;
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
